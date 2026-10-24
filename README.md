@@ -2,7 +2,7 @@
 
 A free, browser-based invoice generator for freelancers and small businesses. Like [SnapFrame](https://github.com/puneetfsn/snapframe), it is a static web app: no account, build step or backend required.
 
-**Live app:** https://puneetfsn.github.io/invoice-generator/
+**GitHub Pages URL (after Pages is enabled):** https://puneetfsn.github.io/invoice-generator/
 
 ## What it does
 
@@ -22,4 +22,4 @@ Your invoice and uploaded logo stay in the current browser's localStorage. Clear
 
 ## Hosting
 
-The app is static. To publish from GitHub Pages, open **Settings → Pages**, choose **Deploy from a branch**, select `main` and `/ (root)`, then save. GitHub Pages serves `index.html` at the URL above once the changes are merged to `main` and Pages finishes building.
+The app is static. To publish from GitHub Pages, open **Settings → Pages**, choose **Deploy from a branch**, select `main` and `/ (root)`, then save. GitHub Pages serves `index.html` at the URL above once the changes are merged to `main` and Pages finishes building. GitHub Pages could not be enabled automatically with this repository connection, so a repository administrator must complete this step in Settings.
