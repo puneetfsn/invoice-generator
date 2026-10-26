@@ -1,77 +1,35 @@
-# Kutumb Care
+# Invoice Studio
 
-A private, 100% offline Android emergency dossier for Indian families.
+A free, browser-based invoice generator for freelancers and small businesses. Like [SnapFrame](https://github.com/puneetfsn/snapframe), it is a static web app: no account, build step or backend required.
 
-Kutumb Care helps you catalogue **where** identity papers, bank accounts, insurance policies, EPF / UAN, property deeds and trusted contacts live — so your people can find them in an emergency. It never asks for net-banking passwords, UPI PINs, ATM PINs, OTPs or CVVs.
+**Live app:** https://puneetfsn.github.io/invoice-generator/
 
-When the time comes, print the **Family Emergency Dossier** PDF, seal it, and keep a copy with trusted kin or in a bank locker.
+## What it does
 
-## Privacy contract
+- Add business and client details, a logo, invoice dates and currency
+- Add or remove line items with automatically calculated totals, discount and tax
+- Optionally add a diagonal business-name watermark (or custom text), with horizontal and vertical alignment controls
+- Choose a custom invoice background color
+- Preview an A4-style invoice as you type
+- Download a PDF or use the browser’s Print → Save as PDF option
+- Automatically save the current invoice in your browser’s localStorage
 
-- **No internet.** `android.permission.INTERNET` is forbidden and stripped from the manifest.
-- **No account, no cloud, no ads, no analytics.**
-- All records stay in a local Room database on the phone.
-- Optional 4-digit PIN is hashed with SHA-256 on device.
-- Cloud backup of app data is disabled. You can export your own JSON file.
-- The printable PDF is generated on-device with Android’s `PdfDocument` API.
+## Run locally
 
-## What the app records (metadata only)
+Open `index.html` in a browser, or run `python3 -m http.server 8000` from this folder and visit http://localhost:8000/. The previous `invoice-generator.html` URL redirects to the app.
 
-| Field | Example |
-| --- | --- |
-| Institution | SBI — MG Road branch |
-| Nominee status | Verified / Needs nominee / Not applicable |
-| Physical location | Master bedroom almirah / blue folder |
-| Reference | Policy, account, folio or UAN number |
-| Contact | LIC agent name and phone |
+PDF export loads [html2pdf.js](https://github.com/eKoopmans/html2pdf.js) from a CDN, so an internet connection is required for the PDF button. If the library cannot load, use Print → Save as PDF. Editing and preview work offline.
 
-## India-specific checklist (auto-seeded)
+Watermarks are visual branding only and do not verify a business. For colored backgrounds when using Print → Save as PDF, turn on **Background graphics** in the browser print settings.
 
-Identity & civil · Banking & funds · Investments (Demat, EPF/UAN, PPF, NPS, gold) · Insurance · Property & loans · Digital legacy · Trusted contacts (CA, lawyer, agent).
+Your invoice and uploaded logo stay in the current browser's localStorage. Clearing site data or switching browsers will remove them; there is no server-side backup.
 
-## Features
+## Hosting
 
-1. **Family readiness score** on the home screen and a Glance home-screen widget.
-2. **Missing nominee alerts** for bank, investment and insurance records.
-3. **On-device A4 PDF dossier** shared through FileProvider (print, Drive, Bluetooth — your choice).
-4. **Optional PIN lock**, dark / light theme, family profile.
-5. **JSON backup & restore** via the system file picker. The PIN is never exported.
+The app is published with GitHub Pages from `main` at `/ (root)`. Changes appear on the live site after they are merged to `main` and Pages finishes rebuilding.
 
-## Project structure
+## Search visibility
 
-```
-app/src/main/java/com/puneetfsn/kutumbcare/
-  data/       Room entities, DAO, seeder, DataStore, JSON backup
-  pdf/        Family Emergency Dossier generator
-  ui/         Jetpack Compose screens (dashboard, records, PIN, settings)
-  widget/     Glance readiness widget
-  di/         Manual app container (no Hilt, no network)
-.github/workflows/build.yml   Cloud APK build
-```
+The homepage has a descriptive title, visible introduction, canonical URL, social sharing metadata and WebApplication structured data. The sitemap is available at https://puneetfsn.github.io/invoice-generator/sitemap.xml.
 
-## Build an APK (GitHub Actions)
-
-This repository is set up so you never need Android Studio on a slow laptop.
-
-1. Push to `main` or any `arena/**` branch, or run **Actions → Build APK → Run workflow**.
-2. When the job finishes, open the run and download the `kutumb-care-debug` artifact.
-3. Install the APK on your phone (you will need to allow unknown sources).
-
-The debug APK is signed with the public debug keystore. It is installable for testing, not for Play Store.
-
-## Build locally
-
-Requires JDK 17 and Android SDK 34.
-
-```bash
-./gradlew :app:assembleDebug
-# APK: app/build/outputs/apk/debug/
-```
-
-## Tech stack
-
-Kotlin · Jetpack Compose (Material 3) · Room · DataStore · Coroutines / Flow · Glance · native `PdfDocument` · Gradle 8.7 · AGP 8.5.2
-
-## Safety reminder
-
-Never type a password, UPI PIN, ATM PIN, OTP or CVV into Kutumb Care. Write a **location note** instead (“screen-unlock note is in the Godrej safe”).
+To request indexing, add `https://puneetfsn.github.io/invoice-generator/` as a **URL-prefix property** in [Google Search Console](https://search.google.com/search-console/), complete ownership verification using the method Google provides, submit the sitemap URL, and request indexing for the homepage. Verification requires your own Search Console code or file; it is not included in this repository. Indexing and rankings are not guaranteed.
